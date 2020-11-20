@@ -1,0 +1,30 @@
+header img {
+    width: 100px;
+    height: 60px;
+}
+
+.app-wrapper {
+    display: grid;
+    width: 1200px;
+    grid-template-areas:
+    "h h"
+    "l m";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 0px;
+}
+
+.header {
+    grid-area: h;
+    background-color: green;
+}
+
+.left-bar {
+    grid-area: l;
+    background-color: burlywood;
+}
+
+.main {
+    grid-area: m;
+    background-color: cornflowerblue;
+}
