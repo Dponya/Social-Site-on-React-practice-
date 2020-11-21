@@ -8,3 +8,9 @@
     grid-template-columns: 2fr 10fr;
     grid-gap: 0px;
 }
+
+
+.main {
+    grid-area: m;
+    background-color: cornflowerblue;
+}

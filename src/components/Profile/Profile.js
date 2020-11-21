@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './Profile.module.css'
+/* import styles from './Profile.module.css' */
 import Post from './MyPost/Post/Post'
 import NewPost from './MyPost/NewPost/NewPost';
 
 const Profile = () => {
     return (
-        <div className={styles.main}>
+        <div>
             <img src="https://cs8.pikabu.ru/post_img/big/2017/11/13/4/1510547981156877032.jpg" />
             <div>
                 ava + des
@@ -14,7 +14,7 @@ const Profile = () => {
                 my posts
             </div>
             <NewPost />
-            <Post />
+            <Post message="Very nice!" />
         </div>
     )
 }
