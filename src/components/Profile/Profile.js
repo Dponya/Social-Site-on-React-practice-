@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from './Profile.module.css'
 
 const Profile = () => {
     return (
-        <div className="main">
+        <div className={styles.main}>
             <img src="https://cs8.pikabu.ru/post_img/big/2017/11/13/4/1510547981156877032.jpg" />
             <div>
                 ava + des

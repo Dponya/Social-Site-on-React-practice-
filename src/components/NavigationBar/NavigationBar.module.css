@@ -1,0 +1,8 @@
+.leftBar {
+    grid-area: l;
+    background-color: burlywood;
+}
+
+.leftBar.active {
+    color: darkgoldenrod;
+}
