@@ -7,15 +7,18 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Profile from './Profile/Profile';
 /* import Profile from './Profile/Profile'; */
 
-function App() {
+function App(props) {
+  let AuthorDialogue = props.authorDialogue;
+  let MessageDialogue = props.messageDialogue;
+  let PostData = props.postData
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
         <NavigationBar />
         <div className="main">
-          <Route exact path="/dialogs" component={Dialogue} />
-          <Route path="/profile" component={Profile} />
+          <Route exact path="/dialogs" component={() => <Dialogue authorDialogue={AuthorDialogue} messageDialogue={MessageDialogue} />} />
+          <Route path="/profile" component={() => <Profile postData={PostData} />} />
 
         </div>
       </div>

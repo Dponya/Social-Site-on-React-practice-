@@ -1,35 +1,26 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styles from './Dialogue.module.css'
-
-const DialogueAuthor = (props) => {
-    const path = '/dialogs/' + props.id;
-    return (
-        <div>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
-
-const Message = (props) => {
-    return (
-        <div>
-            {props.message}
-        </div>
-    )
-}
+import styles from './Dialogue.module.css';
+import DialogueAuthor from './DialogueAuthor/DialogueAuthor';
+import Message from './Message/Message';
 
 
-const Dialogue = () => {
+const Dialogue = (props) => {
+
+    const AuthorMapped = props.authorDialogue.map((author) => {
+        return <DialogueAuthor name={author.name} id={author.id} />
+    });
+
+    const MessageMapped = props.messageDialogue.map((message) => {
+        return <Message message={message.message} id={message.id} />
+    });
+
     return (
         <div className={styles.dialogueWrapper}>
             <div className="dialogueUser">
-                <DialogueAuthor name="Vladislav" id="1" />
-                <DialogueAuthor name="Ariksey" id="2" />
+                {AuthorMapped}
             </div>
             <div className="dialogueMessages">
-                <Message message="My Sexy Dodo" />
-                <Message message="Alalalalal" />
+                {MessageMapped}
             </div>
         </div>
     )

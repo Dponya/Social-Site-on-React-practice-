@@ -4,7 +4,12 @@ import Post from './MyPost/Post/Post'
 import NewPost from './MyPost/NewPost/NewPost';
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 
-const Profile = () => {
+const Profile = (props) => {
+
+    const PostMapped = props.postData.map((post) => {
+        return <Post message={post.message} />
+    });
+
     return (
         <div>
             <ProfileInfo />
@@ -12,9 +17,9 @@ const Profile = () => {
                 my posts
             </div>
             <NewPost />
-            <Post message="Very nice!" />
+            {PostMapped}
         </div>
-    )
+    );
 }
 
 export default Profile;
