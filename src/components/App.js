@@ -14,7 +14,7 @@ function App() {
         <Header />
         <NavigationBar />
         <div className="main">
-          <Route path="/dialogs" component={Dialogue} />
+          <Route exact path="/dialogs" component={Dialogue} />
           <Route path="/profile" component={Profile} />
 
         </div>
