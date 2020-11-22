@@ -1,8 +1,13 @@
 .leftBar {
     grid-area: l;
     background-color: burlywood;
+    padding: 5px;
 }
 
-.leftBar.active {
+.leftBar a {
+    text-decoration: none;
+}
+
+.leftBarActive {
     color: darkgoldenrod;
 }
