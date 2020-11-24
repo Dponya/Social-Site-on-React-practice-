@@ -6,7 +6,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo'
 
 const Profile = (props) => {
 
-    const PostMapped = props.postData.map((post) => {
+    const PostMapped = props.state.postData.map((post) => {
         return <Post message={post.message} />
     });
 
@@ -16,7 +16,7 @@ const Profile = (props) => {
             <div>
                 my posts
             </div>
-            <NewPost />
+            <NewPost addPost={props.addPost} />
             {PostMapped}
         </div>
     );

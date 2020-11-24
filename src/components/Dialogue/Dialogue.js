@@ -6,11 +6,11 @@ import Message from './Message/Message';
 
 const Dialogue = (props) => {
 
-    const AuthorMapped = props.authorDialogue.map((author) => {
+    const AuthorMapped = props.state.authorDialogue.map((author) => {
         return <DialogueAuthor name={author.name} id={author.id} />
     });
 
-    const MessageMapped = props.messageDialogue.map((message) => {
+    const MessageMapped = props.state.messageDialogue.map((message) => {
         return <Message message={message.message} id={message.id} />
     });
 

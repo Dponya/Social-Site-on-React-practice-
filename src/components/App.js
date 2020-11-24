@@ -8,17 +8,14 @@ import Profile from './Profile/Profile';
 /* import Profile from './Profile/Profile'; */
 
 function App(props) {
-  let AuthorDialogue = props.authorDialogue;
-  let MessageDialogue = props.messageDialogue;
-  let PostData = props.postData
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <NavigationBar />
+        <NavigationBar state={props.state.friendDetails} />
         <div className="main">
-          <Route exact path="/dialogs" component={() => <Dialogue authorDialogue={AuthorDialogue} messageDialogue={MessageDialogue} />} />
-          <Route path="/profile" component={() => <Profile postData={PostData} />} />
+          <Route path="/dialogs" render={() => <Dialogue state={props.state.dialogueDetails} />} />
+          <Route path="/profile" render={() => <Profile state={props.state.profileDetails} addPost={props.addPost} />} />
 
         </div>
       </div>

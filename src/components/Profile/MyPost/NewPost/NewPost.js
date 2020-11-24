@@ -1,10 +1,17 @@
 import React from 'react';
 
-const NewPost = () => {
+const NewPost = (props) => {
+    let newPostElement = React.createRef();
+
+    let addPost = () => {
+        let text = newPostElement.current.value;
+        props.addPost(text);
+        newPostElement.current.value = '';
+    }
     return (<div>
-        <textarea>
+        <textarea ref={newPostElement}>
         </textarea>
-        <button>Set your fucking post</button>
+        <button onClick={addPost}>Set your fucking post</button>
     </div>
     )
 }

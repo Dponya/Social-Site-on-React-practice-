@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './NavigationBar.module.css'
+import Friends from './Friends/Friends'
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
     return (
         <nav className={styles.leftBar}>
             <div className={`${styles.leftBar} ${styles.active}`}>
@@ -20,6 +21,10 @@ const NavigationBar = () => {
             </div>
             <div className={styles.leftBar}>
                 <a>Settings</a>
+            </div>
+            <div className={styles.leftBar}>
+                <a>Friends</a>
+                <Friends state={props.state.users} />
             </div>
         </nav>
     )
