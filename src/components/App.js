@@ -14,8 +14,12 @@ function App(props) {
         <Header />
         <NavigationBar state={props.state.friendDetails} />
         <div className="main">
-          <Route path="/dialogs" render={() => <Dialogue state={props.state.dialogueDetails} />} />
-          <Route path="/profile" render={() => <Profile state={props.state.profileDetails} addPost={props.addPost} />} />
+          <Route path="/dialogs" render={() => <Dialogue state={props.state.dialogueDetails} sendMessage={props.sendMessage} updateMess={props.updateMess} />} />
+          <Route path="/profile" render={() => <Profile
+            state={props.state.profileDetails}
+            addPost={props.addPost}
+            updateText={props.updateText}
+          />} />
 
         </div>
       </div>

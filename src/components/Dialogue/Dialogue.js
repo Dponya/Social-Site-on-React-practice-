@@ -14,13 +14,31 @@ const Dialogue = (props) => {
         return <Message message={message.message} id={message.id} />
     });
 
+    let newMessElement = React.createRef();
+
+    let sendMessage = () => {
+        props.sendMessage();
+    }
+
+    let updateText = () => {
+        let text = newMessElement.current.value;
+        props.updateMess(text);
+    }
+
     return (
+
+
         <div className={styles.dialogueWrapper}>
             <div className="dialogueUser">
                 {AuthorMapped}
             </div>
             <div className="dialogueMessages">
                 {MessageMapped}
+                <div>
+                    <textarea onChange={updateText} value={props.state.infoDialogue} ref={newMessElement}>
+                    </textarea>
+                    <button onClick={sendMessage}>Send your fucking message</button>
+                </div>
             </div>
         </div>
     )

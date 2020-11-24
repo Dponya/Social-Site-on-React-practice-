@@ -4,12 +4,17 @@ const NewPost = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        let text = newPostElement.current.value;
-        props.addPost(text);
-        newPostElement.current.value = '';
+        props.addPost();
+        /* newPostElement.current.value = ''; */
     }
+
+    let updateText = () => {
+        let text = newPostElement.current.value;
+        props.updateText(text);
+    }
+
     return (<div>
-        <textarea ref={newPostElement}>
+        <textarea onChange={updateText} value={props.newPostText} ref={newPostElement}>
         </textarea>
         <button onClick={addPost}>Set your fucking post</button>
     </div>
