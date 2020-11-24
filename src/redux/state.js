@@ -1,4 +1,7 @@
-import { rerender } from '../render'
+let rerender = () => {
+    console.log('State changed');
+}
+
 const state = {
 
     profileDetails: {
@@ -27,7 +30,7 @@ const state = {
     }
 }
 
-export let addPost = () => {
+export const addPost = () => {
     let post = {
         message: state.profileDetails.newPostText
     }
@@ -36,20 +39,24 @@ export let addPost = () => {
     state.profileDetails.newPostText = '';
 }
 
-export let updateText = (text) => {
+export const updateText = (text) => {
     state.profileDetails.newPostText = text;
     rerender(state);
 }
 
-export let sendMessage = () => {
+export const sendMessage = () => {
     state.dialogueDetails.messageDialogue.push({ message: state.dialogueDetails.infoDialogue, id: 3 })
     rerender(state);
     state.dialogueDetails.infoDialogue = '';
 }
 
-export let updateMess = (text) => {
+export const updateMess = (text) => {
     state.dialogueDetails.infoDialogue = text;
     rerender(state);
+}
+
+export let subscribe = (observ) => {
+    rerender = observ;
 }
 
 export default state;
