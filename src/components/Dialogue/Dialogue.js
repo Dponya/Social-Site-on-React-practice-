@@ -17,12 +17,12 @@ const Dialogue = (props) => {
     let newMessElement = React.createRef();
 
     let sendMessage = () => {
-        props.sendMessage();
+        props.dispatch({ type: 'SEND-MESSAGE' });
     }
 
     let updateText = () => {
         let text = newMessElement.current.value;
-        props.updateMess(text);
+        props.dispatch({ type: 'UPDATE-MESS', text: text });
     }
 
     return (

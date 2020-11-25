@@ -16,7 +16,12 @@ const Profile = (props) => {
             <div>
                 my posts
             </div>
-            <NewPost addPost={props.addPost} newPostText={props.state.newPostText} updateText={props.updateText} />
+            <NewPost
+                //addPost={props.addPost} 
+                newPostText={props.state.newPostText}
+                dispatch={props.dispatch}
+            //updateText={props.updateText} 
+            />
             {PostMapped}
         </div>
     );

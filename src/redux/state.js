@@ -1,4 +1,3 @@
-
 let store = {
 
     _state: {
@@ -33,7 +32,7 @@ let store = {
         console.log('State changed');
     },
 
-    addPost() {
+    _addPost() {
         let post = {
             message: this._state.profileDetails.newPostText
         }
@@ -42,18 +41,18 @@ let store = {
         this._state.profileDetails.newPostText = '';
     },
 
-    updateText(text) {
+    _updateText(text) {
         this._state.profileDetails.newPostText = text;
         this.rerender(this._state);
     },
 
-    sendMessage() {
+    _sendMessage() {
         this._state.dialogueDetails.messageDialogue.push({ message: this._state.dialogueDetails.infoDialogue, id: 3 })
         this.rerender(this._state);
         this._state.dialogueDetails.infoDialogue = '';
     },
 
-    updateMess(text) {
+    _updateMess(text) {
         this._state.dialogueDetails.infoDialogue = text;
         this.rerender(this._state);
     },
@@ -64,6 +63,25 @@ let store = {
 
     getState() {
         return this._state;
+    },
+
+    dispatch(action) {
+        switch (action.type) {
+            case 'ADD-POST':
+                this._addPost();
+                break;
+            case 'UPDATE-TEXT':
+                this._updateText(action.text);
+                break;
+            case 'SEND-MESSAGE':
+                this._sendMessage();
+                break;
+            case 'UPDATE-MESS':
+                this._updateMess(action.text);
+                break;
+            default:
+                console.log('error');
+        }
     }
 }
 
