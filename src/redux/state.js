@@ -1,62 +1,70 @@
-let rerender = () => {
-    console.log('State changed');
-}
 
-const state = {
+let store = {
 
-    profileDetails: {
-        postData: [
-            { message: 'Ooooh Its kazashka! I love!' },
-            { message: 'Very nice!' }
-        ],
-        newPostText: '',
+    _state: {
+
+        profileDetails: {
+            postData: [
+                { message: 'Ooooh Its kazashka! I love!' },
+                { message: 'Very nice!' }
+            ],
+            newPostText: '',
+        },
+        dialogueDetails: {
+            authorDialogue: [
+                { name: 'Vladislav', id: 1 }, { name: 'Ariksey', id: 2 }
+            ],
+
+            messageDialogue: [
+                { message: 'My Sexy Dodo hmmmmm', id: 1 }, { message: 'Hello world', id: 2 }
+            ],
+
+            infoDialogue: '',
+        },
+        friendDetails: {
+            users: [
+                { name: 'Vladislav' },
+                { name: 'Ariksey' }
+            ]
+        }
     },
-    dialogueDetails: {
-        authorDialogue: [
-            { name: 'Vladislav', id: 1 }, { name: 'Ariksey', id: 2 }
-        ],
 
-        messageDialogue: [
-            { message: 'My Sexy Dodo hmmmmm', id: 1 }, { message: 'Hello world', id: 2 }
-        ],
-
-        infoDialogue: '',
+    rerender() {
+        console.log('State changed');
     },
-    friendDetails: {
-        users: [
-            { name: 'Vladislav' },
-            { name: 'Ariksey' }
-        ]
+
+    addPost() {
+        let post = {
+            message: this._state.profileDetails.newPostText
+        }
+        this._state.profileDetails.postData.push(post);
+        this.rerender(this._state);
+        this._state.profileDetails.newPostText = '';
+    },
+
+    updateText(text) {
+        this._state.profileDetails.newPostText = text;
+        this.rerender(this._state);
+    },
+
+    sendMessage() {
+        this._state.dialogueDetails.messageDialogue.push({ message: this._state.dialogueDetails.infoDialogue, id: 3 })
+        this.rerender(this._state);
+        this._state.dialogueDetails.infoDialogue = '';
+    },
+
+    updateMess(text) {
+        this._state.dialogueDetails.infoDialogue = text;
+        this.rerender(this._state);
+    },
+
+    subscribe(observ) {
+        this.rerender = observ;
+    },
+
+    getState() {
+        return this._state;
     }
 }
 
-export const addPost = () => {
-    let post = {
-        message: state.profileDetails.newPostText
-    }
-    state.profileDetails.postData.push(post);
-    rerender(state);
-    state.profileDetails.newPostText = '';
-}
-
-export const updateText = (text) => {
-    state.profileDetails.newPostText = text;
-    rerender(state);
-}
-
-export const sendMessage = () => {
-    state.dialogueDetails.messageDialogue.push({ message: state.dialogueDetails.infoDialogue, id: 3 })
-    rerender(state);
-    state.dialogueDetails.infoDialogue = '';
-}
-
-export const updateMess = (text) => {
-    state.dialogueDetails.infoDialogue = text;
-    rerender(state);
-}
-
-export let subscribe = (observ) => {
-    rerender = observ;
-}
-
-export default state;
+export default store;

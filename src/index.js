@@ -1,15 +1,34 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import state, { addPost, updateText, sendMessage, updateMess } from './redux/state'
-import { subscribe } from './redux/state'
+import store from './redux/state'
 
-let rerender = (state) => {
+/* let rerender = () => {
     ReactDOM.render(
-        <App state={state} addPost={addPost} updateText={updateText} sendMessage={sendMessage} updateMess={updateMess} />,
+        <App />,
         document.getElementById('root')
     );
 }
 
 subscribe(rerender);
 
-rerender(state);
+store.subscribe.rerender(state); */
+
+
+let rerender = (state) => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App
+                state={state}
+                addPost={store.addPost.bind(store)}
+                updateText={store.updateText.bind(store)}
+                sendMessage={store.sendMessage.bind(store)}
+                updateMess={store.updateMess.bind(store)} />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+};
+
+rerender(store.getState(store.getState()));
+
+store.subscribe(rerender);
