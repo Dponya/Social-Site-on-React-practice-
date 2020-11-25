@@ -1,19 +1,17 @@
 import React from 'react';
+import { addPostDispatch, updateTextDispatch } from '../../../../redux/state';
 
 const NewPost = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        props.dispatch({ type: 'ADD-POST' });
+        props.dispatch(addPostDispatch());
         /* newPostElement.current.value = ''; */
     }
 
     let updateText = () => {
         let text = newPostElement.current.value;
-        props.dispatch({
-            type: 'UPDATE-TEXT',
-            text: text,
-        })
+        props.dispatch(updateTextDispatch(text));
     }
 
     return (<div>

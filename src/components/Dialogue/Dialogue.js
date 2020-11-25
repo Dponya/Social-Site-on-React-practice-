@@ -1,4 +1,5 @@
 import React from 'react';
+import { sendMessageDispatch, updateMessDispatch } from '../../redux/state';
 import styles from './Dialogue.module.css';
 import DialogueAuthor from './DialogueAuthor/DialogueAuthor';
 import Message from './Message/Message';
@@ -17,12 +18,12 @@ const Dialogue = (props) => {
     let newMessElement = React.createRef();
 
     let sendMessage = () => {
-        props.dispatch({ type: 'SEND-MESSAGE' });
+        props.dispatch(sendMessageDispatch());
     }
 
     let updateText = () => {
         let text = newMessElement.current.value;
-        props.dispatch({ type: 'UPDATE-MESS', text: text });
+        props.dispatch(updateMessDispatch(text));
     }
 
     return (
