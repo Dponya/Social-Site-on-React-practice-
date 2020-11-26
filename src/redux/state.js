@@ -1,3 +1,6 @@
+import { dialogueReducer } from "./dialogueReducer";
+import { profileReducer } from "./profileReducer";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_TEXT = 'UPDATE-TEXT';
 const SEND_MESSAGE = 'SEND-MESSAGE';
@@ -38,31 +41,6 @@ let store = {
         console.log('State changed');
     },
 
-    _addPost() {
-        let post = {
-            message: this._state.profileDetails.newPostText
-        }
-        this._state.profileDetails.postData.push(post);
-        this.rerender(this._state);
-        this._state.profileDetails.newPostText = '';
-    },
-
-    _updateText(text) {
-        this._state.profileDetails.newPostText = text;
-        this.rerender(this._state);
-    },
-
-    _sendMessage() {
-        this._state.dialogueDetails.messageDialogue.push({ message: this._state.dialogueDetails.infoDialogue, id: 3 })
-        this.rerender(this._state);
-        this._state.dialogueDetails.infoDialogue = '';
-    },
-
-    _updateMess(text) {
-        this._state.dialogueDetails.infoDialogue = text;
-        this.rerender(this._state);
-    },
-
     subscribe(observ) {
         this.rerender = observ;
     },
@@ -72,22 +50,9 @@ let store = {
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case 'ADD-POST':
-                this._addPost();
-                break;
-            case 'UPDATE-TEXT':
-                this._updateText(action.text);
-                break;
-            case 'SEND-MESSAGE':
-                this._sendMessage();
-                break;
-            case 'UPDATE-MESS':
-                this._updateMess(action.text);
-                break;
-            default:
-                console.log('error');
-        }
+        this._state.profileDetails = profileReducer(this._state.profileDetails, action);
+        this._state.dialogueDetails = dialogueReducer(this._state.dialogueDetails, action);
+        this.rerender(this._state);
     }
 }
 
