@@ -1,5 +1,4 @@
 import React from 'react';
-import { sendMessageDispatch, updateMessDispatch } from '../../redux/state';
 import styles from './Dialogue.module.css';
 import DialogueAuthor from './DialogueAuthor/DialogueAuthor';
 import Message from './Message/Message';
@@ -7,23 +6,23 @@ import Message from './Message/Message';
 
 const Dialogue = (props) => {
 
-    const AuthorMapped = props.state.authorDialogue.map((author) => {
+    const AuthorMapped = props.dialogueDetails.authorDialogue.map((author) => {
         return <DialogueAuthor name={author.name} id={author.id} />
     });
 
-    const MessageMapped = props.state.messageDialogue.map((message) => {
+    const MessageMapped = props.dialogueDetails.messageDialogue.map((message) => {
         return <Message message={message.message} id={message.id} />
     });
 
     let newMessElement = React.createRef();
 
-    let sendMessage = () => {
-        props.dispatch(sendMessageDispatch());
+    let onSendMessage = () => {
+        props.sendMessage()
     }
 
-    let updateText = () => {
+    let onUpdateMess = () => {
         let text = newMessElement.current.value;
-        props.dispatch(updateMessDispatch(text));
+        props.updateMess(text)
     }
 
     return (
@@ -36,9 +35,9 @@ const Dialogue = (props) => {
             <div className="dialogueMessages">
                 {MessageMapped}
                 <div>
-                    <textarea onChange={updateText} value={props.state.infoDialogue} ref={newMessElement}>
+                    <textarea onChange={onUpdateMess} value={props.dialogueDetails.infoDialogue} ref={newMessElement}>
                     </textarea>
-                    <button onClick={sendMessage}>Send your fucking message</button>
+                    <button onClick={onSendMessage}>Send your fucking message</button>
                 </div>
             </div>
         </div>

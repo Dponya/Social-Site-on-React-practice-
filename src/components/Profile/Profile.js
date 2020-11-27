@@ -1,12 +1,11 @@
 import React from 'react';
 /* import styles from './Profile.module.css' */
 import Post from './MyPost/Post/Post'
-import NewPost from './MyPost/NewPost/NewPost';
 import ProfileInfo from './ProfileInfo/ProfileInfo'
+import NewPostContainer from './MyPost/NewPost/NewPostContainer';
 
 const Profile = (props) => {
-
-    const PostMapped = props.state.postData.map((post) => {
+    const PostMapped = props.store.getState().profileDetails.postData.map((post) => {
         return <Post message={post.message} />
     });
 
@@ -16,11 +15,8 @@ const Profile = (props) => {
             <div>
                 my posts
             </div>
-            <NewPost
-                //addPost={props.addPost} 
-                newPostText={props.state.newPostText}
-                dispatch={props.dispatch}
-            //updateText={props.updateText} 
+            <NewPostContainer
+                store={props.store}
             />
             {PostMapped}
         </div>

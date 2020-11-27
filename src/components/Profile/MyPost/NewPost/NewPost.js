@@ -1,23 +1,21 @@
 import React from 'react';
-import { addPostDispatch, updateTextDispatch } from '../../../../redux/state';
 
 const NewPost = (props) => {
     let newPostElement = React.createRef();
 
-    let addPost = () => {
-        props.dispatch(addPostDispatch());
-        /* newPostElement.current.value = ''; */
+    let onAddPost = () => {
+        props.addPost();
     }
 
-    let updateText = () => {
+    let onUpdateText = () => {
         let text = newPostElement.current.value;
-        props.dispatch(updateTextDispatch(text));
+        props.updateText(text)
     }
 
     return (<div>
-        <textarea onChange={updateText} value={props.newPostText} ref={newPostElement}>
+        <textarea onChange={onUpdateText} value={props.newPostText} ref={newPostElement}>
         </textarea>
-        <button onClick={addPost}>Set your fucking post</button>
+        <button onClick={onAddPost}>Set your fucking post</button>
     </div>
     )
 }
