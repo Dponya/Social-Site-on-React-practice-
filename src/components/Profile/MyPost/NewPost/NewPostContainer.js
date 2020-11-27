@@ -1,20 +1,25 @@
-import React from 'react';
+import { connect } from 'react-redux';
 import { addPostDispatch, updateTextDispatch } from '../../../../redux/state';
 import NewPost from './NewPost';
 
-const NewPostContainer = (props) => {
-
-    let addPost = () => {
-        props.store.dispatch(addPostDispatch());
+let postMapStateToProps = (state) => {
+    return {
+        profileDetails: state.profileDetails,
     }
-
-    let updateText = (text) => {
-        props.store.dispatch(updateTextDispatch(text));
-    }
-
-    return (
-        <NewPost addPost={addPost} updateText={updateText} newPostText={props.store.getState().newPostText} />
-    )
 }
+
+let postMapDispatchToProps = (dispatch) => {
+    return {
+        addPost: () => {
+            dispatch(addPostDispatch());
+        },
+
+        updateText: (text) => {
+            dispatch(updateTextDispatch(text))
+        }
+    }
+}
+
+const NewPostContainer = connect(postMapStateToProps, postMapDispatchToProps)(NewPost);
 
 export default NewPostContainer;

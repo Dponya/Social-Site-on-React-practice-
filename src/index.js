@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './components/App';
 import store from './redux/reduxStore'
 
 let rerender = (state) => {
     ReactDOM.render(
-        <React.StrictMode>
+        <Provider store={store}>
             <App
                 state={state}
                 store={store}
                 dispatch={store.dispatch.bind(store)}
             />
-        </React.StrictMode>,
+        </Provider>,
         document.getElementById('root')
     );
 };
