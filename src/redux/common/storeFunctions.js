@@ -1,20 +1,30 @@
 export const addPost = (state) => {
+    let stateCopy = { ...state }
     let post = {
-        message: state.newPostText
+        message: stateCopy.newPostText
     }
-    state.postData.push(post);
-    state.newPostText = '';
+    stateCopy.postData = [...state.postData];
+    stateCopy.postData.push(post);
+    stateCopy.newPostText = '';
+    return stateCopy;
 }
 
 export const updateText = (text, state) => {
-    state.newPostText = text;
+    let stateCopy = { ...state }
+    stateCopy.newPostText = text;
+    return stateCopy
 }
 
 export const sendMessage = (state) => {
-    state.messageDialogue.push({ message: state.infoDialogue, id: 3 })
-    state.infoDialogue = '';
+    let stateCopy = { ...state }
+    stateCopy.messageDialogue = [...state.messageDialogue];
+    stateCopy.messageDialogue.push({ message: stateCopy.infoDialogue, id: 3 });
+    stateCopy.infoDialogue = '';
+    return stateCopy;
 }
 
 export const updateMess = (text, state) => {
-    state.infoDialogue = text;
+    let stateCopy = { ...state };
+    stateCopy.infoDialogue = text;
+    return stateCopy;
 }

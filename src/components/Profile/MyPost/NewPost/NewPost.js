@@ -13,7 +13,7 @@ const NewPost = (props) => {
     }
 
     return (<div>
-        <textarea onChange={onUpdateText} value={props.newPostText} ref={newPostElement}>
+        <textarea onChange={onUpdateText} value={props.profileDetails.newPostText} ref={newPostElement}>
         </textarea>
         <button onClick={onAddPost}>Set your fucking post</button>
     </div>

@@ -9,11 +9,10 @@ let initialState = {
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD-POST':
-            addPost(state);
-            return state;
+            return addPost(state);
+
         case 'UPDATE-TEXT':
-            updateText(action.text, state);
-            return state;
+            return updateText(action.text, state);
         default:
             return state;
     }

@@ -2,13 +2,13 @@ import { connect } from 'react-redux';
 import { sendMessageDispatch, updateMessDispatch } from '../../redux/state';
 import Dialogue from './Dialogue';
 
-let omapStateToProps = (state) => {
+let mapStateToProps = (state) => {
     return {
         dialogueDetails: state.dialogueDetails
     }
 }
 
-let omapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = (dispatch) => {
     return {
         updateMess: (text) => {
             dispatch(updateMessDispatch(text));
@@ -19,6 +19,6 @@ let omapDispatchToProps = (dispatch) => {
     }
 }
 
-const DialogueContainer = connect(omapStateToProps, omapDispatchToProps)(Dialogue);
+const DialogueContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogue);
 
 export default DialogueContainer;

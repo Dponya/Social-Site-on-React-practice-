@@ -34,7 +34,7 @@ const Dialogue = (props) => {
             <div className="dialogueMessages">
                 {MessageMapped}
                 <div>
-                    <textarea onChange={onUpdateMess} value={props.infoDialogue} ref={newMessElement}>
+                    <textarea onChange={onUpdateMess} value={props.dialogueDetails.infoDialogue} ref={newMessElement}>
                     </textarea>
                     <button onClick={onSendMessage}>Send your fucking message</button>
                 </div>

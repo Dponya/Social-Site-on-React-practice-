@@ -15,11 +15,9 @@ let initialState = {
 export const dialogueReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SEND-MESSAGE':
-            sendMessage(state);
-            return state;
+            return sendMessage(state);
         case 'UPDATE-MESS':
-            updateMess(action.text, state);
-            return state;
+            return updateMess(action.text, state);
         default:
             return state;
     }
