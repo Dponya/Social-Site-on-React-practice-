@@ -7,18 +7,18 @@ import Profile from './Profile/Profile';
 import DialogueContainer from './Dialogue/DialogueContainer';
 /* import Profile from './Profile/Profile'; */
 
-function App(props) {
+function App() {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <NavigationBar state={props.state.friendDetails} />
+        <NavigationBar />
         <div className="main">
-          <Route path="/dialogs" render={() => <DialogueContainer store={props.store}
+          <Route path="/dialogs" render={() => <DialogueContainer
 
           />} />
           <Route path="/profile" render={() => <Profile
-            store={props.store}
+
           />} />
 
         </div>

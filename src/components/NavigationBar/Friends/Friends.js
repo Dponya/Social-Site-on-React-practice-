@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Friends.module.css';
 
 const Friends = (props) => {
-    let friendidx = props.state.map((friend) => <p>{friend.name}</p>)
+    let friendidx = props.friendDetails.users.map((friend) => <p>{friend.name}</p>)
     return (
         <div className={styles.friendWrapper}>
             <div>

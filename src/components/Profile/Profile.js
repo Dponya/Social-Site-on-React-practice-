@@ -1,13 +1,11 @@
 import React from 'react';
 /* import styles from './Profile.module.css' */
-import Post from './MyPost/Post/Post'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import NewPostContainer from './MyPost/NewPost/NewPostContainer';
+import { connect } from 'react-redux';
+
 
 const Profile = (props) => {
-    const PostMapped = props.store.getState().profileDetails.postData.map((post) => {
-        return <Post message={post.message} />
-    });
 
     return (
         <div>
@@ -18,9 +16,14 @@ const Profile = (props) => {
             <NewPostContainer
                 store={props.store}
             />
-            {PostMapped}
         </div>
     );
 }
+
+const mapStateToProps = state => ({
+    profileDetails: state.profileDetails
+});
+
+connect(mapStateToProps)(Profile);
 
 export default Profile;

@@ -2,13 +2,13 @@ import { connect } from 'react-redux';
 import { addPostDispatch, updateTextDispatch } from '../../../../redux/state';
 import NewPost from './NewPost';
 
-let postMapStateToProps = (state) => {
+let mapStateToProps = (state) => {
     return {
         profileDetails: state.profileDetails,
     }
 }
 
-let postMapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = (dispatch) => {
     return {
         addPost: () => {
             dispatch(addPostDispatch());
@@ -20,6 +20,6 @@ let postMapDispatchToProps = (dispatch) => {
     }
 }
 
-const NewPostContainer = connect(postMapStateToProps, postMapDispatchToProps)(NewPost);
+const NewPostContainer = connect(mapStateToProps, mapDispatchToProps)(NewPost);
 
 export default NewPostContainer;
