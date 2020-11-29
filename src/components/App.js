@@ -5,7 +5,7 @@ import NavigationBar from './NavigationBar/NavigationBar';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Profile from './Profile/Profile';
 import DialogueContainer from './Dialogue/DialogueContainer';
-/* import Profile from './Profile/Profile'; */
+import UsersContainer from './Users/UsersContainer'
 
 function App() {
   return (
@@ -14,13 +14,9 @@ function App() {
         <Header />
         <NavigationBar />
         <div className="main">
-          <Route path="/dialogs" render={() => <DialogueContainer
-
-          />} />
-          <Route path="/profile" render={() => <Profile
-
-          />} />
-
+          <Route path="/dialogs" render={() => <DialogueContainer />} />
+          <Route path="/profile" render={() => <Profile />} />
+          <Route path="/users" render={() => <UsersContainer />} />
         </div>
       </div>
     </BrowserRouter>
