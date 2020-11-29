@@ -1,6 +1,14 @@
 import React from 'react';
+import * as axios from 'axios';
 
 const Users = (props) => {
+
+    if (props.users.length === 0) {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => props.setUser(response.data.items))
+
+    }
+
     let el = props.users.map((us) => {
         return (
             <div key={us.id}>
@@ -17,10 +25,10 @@ const Users = (props) => {
                     <div>{us.name}</div>
                     <div>{us.status}</div>
                 </span>
-                <span>
+                {/* <span>
                     <div>{us.city}</div>
                     <div>{us.country}</div>
-                </span>
+                </span> */}
             </div>
         )
     });
