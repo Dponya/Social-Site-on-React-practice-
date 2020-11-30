@@ -20,6 +20,9 @@ const NavigationBar = (props) => {
                 <a>Music</a>
             </div>
             <div className={styles.leftBar}>
+                <NavLink to="/users" activeClassName={styles.leftBarActive}>Users</NavLink>
+            </div>
+            <div className={styles.leftBar}>
                 <a>Settings</a>
             </div>
             <div className={styles.leftBar}>
