@@ -3,6 +3,7 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
 const SET_TOTAL_COUNT = "SET-TOTAL-COUNT";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
+const SET_LOADER = "SET-LOADER"
 
 const initialState = {
     users: [
@@ -12,6 +13,7 @@ const initialState = {
     totalCount: 10,
     pageCount: 2,
     currentPage: 1,
+    isFetching: false,
 };
 
 
@@ -52,6 +54,11 @@ export const usersReducer = (state = initialState, action) => {
                 ...state,
                 currentPage: action.count
             };
+        case SET_LOADER:
+            return {
+                ...state,
+                isFetching: action.boolean
+            };
         default:
             return state
     };
@@ -76,4 +83,7 @@ export const setTotalCountActionCreator = (count) => {
 
 export const setCurrentPageActionCreator = (page) => {
     return { type: SET_CURRENT_PAGE, page }
+}
+export const setLoaderActionCreator = (boolean) => {
+    return { type: SET_LOADER, boolean }
 }
