@@ -2,14 +2,13 @@ import React from 'react';
 /* import styles from './Profile.module.css' */
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 import NewPostContainer from './MyPost/NewPost/NewPostContainer';
-import { connect } from 'react-redux';
+/* import { connect } from 'react-redux'; */
 
 
 const Profile = (props) => {
-
     return (
         <div>
-            <ProfileInfo />
+            <ProfileInfo profile={props.profile} />
             <div>
                 my posts
             </div>
@@ -20,10 +19,10 @@ const Profile = (props) => {
     );
 }
 
-const mapStateToProps = state => ({
-    profileDetails: state.profileDetails
+/* const mapStateToProps = state => ({
+    profile: state.profileDetails.profile
 });
 
-connect(mapStateToProps)(Profile);
+connect(mapStateToProps)(Profile); */
 
 export default Profile;

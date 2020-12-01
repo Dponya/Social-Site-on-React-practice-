@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
     let pageCount = Math.ceil(props.totalCount / props.pageCount);
@@ -27,7 +28,7 @@ const Users = (props) => {
                     </div>
                 </span>
                 <span>
-                    <div>{us.name}</div>
+                    <NavLink to={'/profile/' + us.id}>{us.name}</NavLink>
                     <div>{us.status}</div>
                 </span>
                 {/* <span>
