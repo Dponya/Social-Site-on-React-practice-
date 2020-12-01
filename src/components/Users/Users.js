@@ -1,13 +1,18 @@
 import React from 'react';
-import * as axios from 'axios';
 
 const Users = (props) => {
+    let pageCount = Math.ceil(props.totalCount / props.pageCount);
 
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => props.setUser(response.data.items))
-
+    let pages = [];
+    for (let i = 1; i <= pageCount; i++) {
+        pages.push(i);
     }
+
+    let pagesElements = pages.map((l) => {
+        return (
+            <span onClick={() => props.pageChanged(l)}>{l}</span>
+        )
+    });
 
     let el = props.users.map((us) => {
         return (
@@ -26,15 +31,16 @@ const Users = (props) => {
                     <div>{us.status}</div>
                 </span>
                 {/* <span>
-                    <div>{us.city}</div>
-                    <div>{us.country}</div>
-                </span> */}
+                        <div>{us.city}</div>
+                        <div>{us.country}</div>
+                    </span> */}
             </div>
         )
     });
 
     return (
         <div>
+            {pagesElements}
             {el}
         </div>
     )
