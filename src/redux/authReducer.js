@@ -9,7 +9,6 @@ let initialState = {
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH:
-            debugger;
             return {
                 ...state,
                 ...action.data,
@@ -21,6 +20,5 @@ export const authReducer = (state = initialState, action) => {
 }
 
 export const setAuthUserData = (login, email, id) => {
-    debugger;
     return { type: SET_AUTH, data: { login, email, id } }
 }

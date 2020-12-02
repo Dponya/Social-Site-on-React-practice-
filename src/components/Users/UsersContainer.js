@@ -11,7 +11,7 @@ import { follow, setCurrent, setLoader, setTotal, setUsers, unfollow } from '../
 class UsersContainerAPI extends Component {
     componentDidMount() {
         this.props.setLoader(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=5`) //?page=1&count=5
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=5`, { withCredentials: true }) //?page=1&count=5
             .then(response => {
                 this.props.setLoader(false);
                 this.props.setUser(response.data.items);
@@ -22,7 +22,7 @@ class UsersContainerAPI extends Component {
     pageChanged = (el) => {
         //this.props.setPageCounter(el);
         this.props.setLoader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${el}&count=5`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${el}&count=5`, { withCredentials: true })
             .then(response => {
                 this.props.setLoader(false);
                 this.props.setUser(response.data.items);
