@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import Users from './Users';
-import * as axios from 'axios';
 import Loader from '../common/Loader';
 import { follow, setCurrent, setLoader, setTotal, setUsers, unfollow } from '../../redux/usersReducer';
-
+import { reqService } from '../../api/api'
 
 
 
 class UsersContainerAPI extends Component {
+
     componentDidMount() {
         this.props.setLoader(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=1&count=5`, { withCredentials: true }) //?page=1&count=5
+        reqService.getUsers()
             .then(response => {
                 this.props.setLoader(false);
                 this.props.setUser(response.data.items);
@@ -22,7 +22,7 @@ class UsersContainerAPI extends Component {
     pageChanged = (el) => {
         //this.props.setPageCounter(el);
         this.props.setLoader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${el}&count=5`, { withCredentials: true })
+        reqService.getUsersWithEl(el)
             .then(response => {
                 this.props.setLoader(false);
                 this.props.setUser(response.data.items);
