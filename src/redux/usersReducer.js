@@ -3,8 +3,8 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
 const SET_TOTAL_COUNT = "SET-TOTAL-COUNT";
 const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
-const SET_LOADER = "SET-LOADER"
-
+const SET_LOADER = "SET-LOADER";
+const SET_FOLLOWING = "SET-FOLLOWING";
 const initialState = {
     users: [
         /* { id: 1, name: 'Vladislav', country: 'Putinstan', city: 'Irkutia', status: 'Yak she mash!', followed: false },
@@ -14,6 +14,8 @@ const initialState = {
     pageCount: 2,
     currentPage: 1,
     isFetching: false,
+    isFollowing: false,
+    followingProgress: [],
 };
 
 
@@ -59,6 +61,12 @@ export const usersReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.boolean
             };
+        case SET_FOLLOWING:
+            return {
+                ...state,
+                followingProgress: action.isFollowing ? [...state.followingProgress, action.userId]
+                    : state.followingProgress.filter(id => id !== action.userId),
+            };
         default:
             return state
     };
@@ -86,4 +94,8 @@ export const setCurrent = (page) => {
 }
 export const setLoader = (boolean) => {
     return { type: SET_LOADER, boolean }
+}
+
+export const setFollowing = (isFollowing, followingProgress, userId) => {
+    return { type: SET_FOLLOWING, isFollowing, followingProgress, userId }
 }

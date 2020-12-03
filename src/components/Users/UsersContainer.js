@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import Users from './Users';
 import Loader from '../common/Loader';
-import { follow, setCurrent, setLoader, setTotal, setUsers, unfollow } from '../../redux/usersReducer';
+import { follow, setCurrent, setLoader, setTotal, setUsers, unfollow, setFollowing } from '../../redux/usersReducer';
 import { reqService } from '../../api/api'
 
 
@@ -14,8 +14,8 @@ class UsersContainerAPI extends Component {
         reqService.getUsers()
             .then(response => {
                 this.props.setLoader(false);
-                this.props.setUser(response.data.items);
-                this.props.setTotalCount(response.data.totalCount);
+                this.props.setUsers(response.data.items);
+                this.props.setTotal(response.data.totalCount);
             });
 
     }
@@ -34,7 +34,9 @@ class UsersContainerAPI extends Component {
                 <Loader /> :
                 <Users follow={this.props.follow} unfollow={this.props.unfollow}
                     users={this.props.users} totalCount={this.props.totalCount}
-                    pageCount={this.props.pageCount} pageChanged={this.pageChanged} />}
+                    pageCount={this.props.pageCount} pageChanged={this.pageChanged}
+                    setFollowing={this.props.setFollowing} followingProgress={this.props.followingProgress}
+                />}
         </>
         )
     }
@@ -48,21 +50,24 @@ let mapStateToProps = (state) => {
         pageCount: state.usersDetails.pageCount,
         currentPage: state.usersDetails.currentPage,
         isFetching: state.usersDetails.isFetching,
+        followingProgress: state.usersDetails.followingProgress
     }
 }
 
 const UsersContainer = connect(mapStateToProps, {
-    follow: follow,
+    follow,
 
-    unfollow: unfollow,
+    unfollow,
 
-    setUser: setUsers,
+    setUsers,
 
-    setPageCounter: setCurrent,
+    setCurrent,
 
-    setTotalCount: setTotal,
+    setTotal,
 
-    setLoader: setLoader
+    setLoader,
+
+    setFollowing,
 })(UsersContainerAPI);
 
 export default UsersContainer;

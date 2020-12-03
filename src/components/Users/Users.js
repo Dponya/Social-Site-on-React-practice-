@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import * as axios from 'axios';
 import { reqService } from '../../api/api';
 
 const Users = (props) => {
@@ -25,18 +24,22 @@ const Users = (props) => {
                         <img />
                     </div>
                     <div>
-                        {us.followed ? <button onClick={() => {
+                        {us.followed ? <button disabled={props.followingProgress.some(id => id === us.id)} onClick={() => {
+                            props.setFollowing(true, null, us.id)
                             reqService.unfollow(us).then(response => {
                                 if (response.data.resultCode === 0) {
                                     props.unfollow(us.id)
+                                    props.setFollowing(false, null, us.id)
                                 }
                             });
                         }
                         }>Unfollow</button> :
-                            <button onClick={() => {
+                            <button disabled={props.followingProgress.some(id => id === us.id)} onClick={() => {
+                                props.setFollowing(true, null, us.id)
                                 reqService.follow(us).then(response => {
                                     if (response.data.resultCode === 0) {
                                         props.follow(us.id)
+                                        props.setFollowing(false, null, us.id)
                                     }
                                 });
                             }
@@ -49,10 +52,6 @@ const Users = (props) => {
                     <NavLink to={'/profile/' + us.id}>{us.name}</NavLink>
                     <div>{us.status}</div>
                 </span>
-                {/* <span>
-                        <div>{us.city}</div>
-                        <div>{us.country}</div>
-                    </span> */}
             </div>
         )
     });
