@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Dialogue.module.css';
 import DialogueAuthor from './DialogueAuthor/DialogueAuthor';
 import Message from './Message/Message';
-
+import { Redirect } from 'react-router-dom'
 
 const Dialogue = (props) => {
 
@@ -24,23 +24,30 @@ const Dialogue = (props) => {
         let text = newMessElement.current.value;
         props.updateMess(text)
     }
+    if (props.authorized) {
+        return (
+            <div className={styles.dialogueWrapper}>
+                <div className="dialogueUser">
+                    {AuthorMapped}
+                </div>
+                <div className="dialogueMessages">
+                    {MessageMapped}
+                    <div>
+                        <textarea onChange={onUpdateMess} value={props.dialogueDetails.infoDialogue} ref={newMessElement}>
+                        </textarea>
+                        <button onClick={onSendMessage}>Send your fucking message</button>
+                    </div>
 
-    return (
-
-        <div className={styles.dialogueWrapper}>
-            <div className="dialogueUser">
-                {AuthorMapped}
-            </div>
-            <div className="dialogueMessages">
-                {MessageMapped}
-                <div>
-                    <textarea onChange={onUpdateMess} value={props.dialogueDetails.infoDialogue} ref={newMessElement}>
-                    </textarea>
-                    <button onClick={onSendMessage}>Send your fucking message</button>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+
+    else {
+        return (
+            <Redirect to="/login" />
+        )
+    }
 }
 
 export default Dialogue;

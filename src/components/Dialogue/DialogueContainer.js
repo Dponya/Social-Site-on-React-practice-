@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
+import { withRedirecting } from '../../hoc/withAuthHoc';
 import { sendMessageDispatch, updateMessDispatch } from '../../redux/state';
 import Dialogue from './Dialogue';
 
 let mapStateToProps = (state) => {
     return {
-        dialogueDetails: state.dialogueDetails
+        dialogueDetails: state.dialogueDetails,
+        authorized: state.auth.isAuthorized
     }
 }
 
@@ -19,6 +21,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-const DialogueContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogue);
+const MSGauthRedirectComponent = withRedirecting(Dialogue);
+
+const DialogueContainer = connect(mapStateToProps, mapDispatchToProps)(MSGauthRedirectComponent);
 
 export default DialogueContainer;
