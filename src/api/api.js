@@ -27,6 +27,14 @@ class APIservice {
     follow = (us) => {
         return this.istanse.post(`follow/${us.id}`)
     }
+
+    auth = () => {
+        return this.istanse.get(`auth/me`)
+    }
+
+    getProfileId = (userId) => {
+        return this.istanse.get(`profile/${userId}`)
+    }
 }
 
 export const reqService = new APIservice();

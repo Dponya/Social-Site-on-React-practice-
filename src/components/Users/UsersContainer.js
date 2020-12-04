@@ -2,31 +2,21 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import Users from './Users';
 import Loader from '../common/Loader';
-import { follow, setCurrent, setLoader, setTotal, setUsers, unfollow, setFollowing } from '../../redux/usersReducer';
-import { reqService } from '../../api/api'
+import {
+    follow, setCurrent, setLoader,
+    setTotal, setUsers, unfollow, setFollowing, getUsersThunkCreator,
+    pageChangedThunkCreator, unfollowThunkCreator, followThunkCreator
+} from '../../redux/usersReducer';
 
 
 
 class UsersContainerAPI extends Component {
 
     componentDidMount() {
-        this.props.setLoader(true);
-        reqService.getUsers()
-            .then(response => {
-                this.props.setLoader(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotal(response.data.totalCount);
-            });
-
+        this.props.getUsersThunkCreator();
     }
     pageChanged = (el) => {
-        //this.props.setPageCounter(el);
-        this.props.setLoader(true)
-        reqService.getUsersWithEl(el)
-            .then(response => {
-                this.props.setLoader(false);
-                this.props.setUser(response.data.items);
-            });
+        this.props.pageChangedThunkCreator(el);
     }
     render() {
         return (<>
@@ -36,6 +26,7 @@ class UsersContainerAPI extends Component {
                     users={this.props.users} totalCount={this.props.totalCount}
                     pageCount={this.props.pageCount} pageChanged={this.pageChanged}
                     setFollowing={this.props.setFollowing} followingProgress={this.props.followingProgress}
+                    unfollowThunkCreator={this.props.unfollowThunkCreator} followThunkCreator={this.props.followThunkCreator}
                 />}
         </>
         )
@@ -68,6 +59,14 @@ const UsersContainer = connect(mapStateToProps, {
     setLoader,
 
     setFollowing,
+
+    getUsersThunkCreator,
+
+    pageChangedThunkCreator,
+
+    unfollowThunkCreator,
+
+    followThunkCreator,
 })(UsersContainerAPI);
 
 export default UsersContainer;

@@ -1,3 +1,7 @@
+import { reqService } from '../api/api'
+
+
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
@@ -99,3 +103,48 @@ export const setLoader = (boolean) => {
 export const setFollowing = (isFollowing, followingProgress, userId) => {
     return { type: SET_FOLLOWING, isFollowing, followingProgress, userId }
 }
+
+// Redux-Thunks next.
+
+export const getUsersThunkCreator = () =>
+    (dispatch) => {
+        dispatch(setLoader(true))
+        reqService.getUsers()
+            .then(response => {
+                dispatch(setLoader(false));
+                dispatch(setUsers(response.data.items));
+                dispatch(setTotal(response.data.totalCount));
+            });
+    }
+
+export const pageChangedThunkCreator = (el) =>
+    (dispatch) => {
+        dispatch(setLoader(true));
+        reqService.getUsersWithEl(el)
+            .then(response => {
+                dispatch(setLoader(false));
+                dispatch(setUsers(response.data.items));
+            });
+    }
+
+export const unfollowThunkCreator = (us) =>
+    (dispatch) => {
+        dispatch(setFollowing(true, null, us.id))
+        reqService.unfollow(us).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(unfollow(us.id))
+                dispatch(setFollowing(false, null, us.id))
+            }
+        });
+    }
+
+export const followThunkCreator = (us) =>
+    (dispatch) => {
+        dispatch(setFollowing(true, null, us.id))
+        reqService.follow(us).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(follow(us.id))
+                dispatch(setFollowing(false, null, us.id))
+            }
+        });
+    }

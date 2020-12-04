@@ -1,4 +1,5 @@
 import { addPost, updateText } from './common/storeFunctions'
+import { reqService } from '../api/api';
 
 const SET_PROFILE = 'SET-PROFILE';
 
@@ -28,3 +29,10 @@ export const profileReducer = (state = initialState, action) => {
 export const setProfile = (property) => {
     return { type: SET_PROFILE, property }
 }
+
+export const getProfileThunkCreator = (userId) =>
+    (dispatch) => {
+        reqService.getProfileId(userId).then(response => {
+            dispatch(setProfile(response.data))
+        });
+    }
