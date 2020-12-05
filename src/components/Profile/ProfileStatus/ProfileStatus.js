@@ -1,4 +1,4 @@
-/* import React, { Component } from 'react';
+import React, { Component } from 'react';
 
 class ProfileStatus extends Component {
 
@@ -31,6 +31,6 @@ class ProfileStatus extends Component {
             </div>
         )
     }
-} */
-let ProfileStatus = 1;
+}
+
 export default ProfileStatus;
