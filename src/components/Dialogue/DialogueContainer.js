@@ -6,7 +6,6 @@ import Dialogue from './Dialogue';
 let mapStateToProps = (state) => {
     return {
         dialogueDetails: state.dialogueDetails,
-        authorized: state.auth.isAuthorized
     }
 }
 

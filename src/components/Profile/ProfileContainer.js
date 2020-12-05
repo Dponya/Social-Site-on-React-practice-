@@ -20,7 +20,6 @@ class ProfileContainer extends Component {
 let mapStateToProps = (state) => {
     return {
         profile: state.profileDetails.profile,
-        authorized: state.auth.isAuthorized
     }
 }
 
