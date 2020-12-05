@@ -4,6 +4,7 @@ import { getProfileThunkCreator } from '../../redux/profileReducer'
 import { withRouter } from "react-router";
 import { withRedirecting } from '../../hoc/withAuthHoc';
 import Profile from './Profile'
+import { compose } from 'redux';
 class ProfileContainer extends Component {
     componentDidMount() {
         this.props.getProfileThunkCreator(this.props.match.params.userId)
@@ -28,3 +29,9 @@ const AuthRedirectComponent = withRedirecting(ProfileContainer);
 let withRoutingData = withRouter(AuthRedirectComponent);
 
 export default connect(mapStateToProps, { getProfileThunkCreator })(withRoutingData);
+
+compose(
+    connect(mapStateToProps, { getProfileThunkCreator }),
+    withRouter,
+    withRedirecting
+)(ProfileContainer)

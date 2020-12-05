@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withRedirecting } from '../../hoc/withAuthHoc';
 import { sendMessageDispatch, updateMessDispatch } from '../../redux/state';
 import Dialogue from './Dialogue';
@@ -20,8 +21,7 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-const MSGauthRedirectComponent = withRedirecting(Dialogue);
-
-const DialogueContainer = connect(mapStateToProps, mapDispatchToProps)(MSGauthRedirectComponent);
-
-export default DialogueContainer;
+export default compose(
+    withRedirecting,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Dialogue)

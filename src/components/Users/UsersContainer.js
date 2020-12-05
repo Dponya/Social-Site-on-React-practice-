@@ -8,6 +8,7 @@ import {
     pageChangedThunkCreator, unfollowThunkCreator, followThunkCreator
 } from '../../redux/usersReducer';
 import { withRedirecting } from '../../hoc/withAuthHoc'
+import { compose } from 'redux';
 
 
 
@@ -46,28 +47,29 @@ let mapStateToProps = (state) => {
     }
 }
 
-const UsersContainer = withRedirecting(connect(mapStateToProps, {
-    follow,
+export default compose(
+    withRedirecting,
+    connect(mapStateToProps, {
+        follow,
 
-    unfollow,
+        unfollow,
 
-    setUsers,
+        setUsers,
 
-    setCurrent,
+        setCurrent,
 
-    setTotal,
+        setTotal,
 
-    setLoader,
+        setLoader,
 
-    setFollowing,
+        setFollowing,
 
-    getUsersThunkCreator,
+        getUsersThunkCreator,
 
-    pageChangedThunkCreator,
+        pageChangedThunkCreator,
 
-    unfollowThunkCreator,
+        unfollowThunkCreator,
 
-    followThunkCreator,
-})(UsersContainerAPI))
-
-export default UsersContainer;
+        followThunkCreator,
+    })
+)(UsersContainerAPI)

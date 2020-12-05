@@ -1,4 +1,6 @@
-import styles from '../Profile.module.css'
+/* import styles from '../Profile.module.css' */
+import ProfileStatus from '../ProfileStatus/ProfileStatus'
+
 const ProfileInfo = (props) => {
     let name = props.profile.fullName
     if (!props.profile == null) {
@@ -6,10 +8,8 @@ const ProfileInfo = (props) => {
     }
     return (
         <div>
-            <img className={styles.imgTheme} src="https://cs8.pikabu.ru/post_img/big/2017/11/13/4/1510547981156877032.jpg" />
-            {/* <img src={props.profile.photos.small} /> */}
+            <ProfileStatus />
             <div>
-
                 {name}
             </div>
         </div>
