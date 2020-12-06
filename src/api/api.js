@@ -35,6 +35,18 @@ class APIservice {
     getProfileId = (userId) => {
         return this.istanse.get(`profile/${userId}`)
     }
+
+    getStatus = (userId) => {
+        return this.istanse.get('profile/status/' + userId)
+    }
+
+    /*     updateStatus = (status) => {
+            return this.istanse.put('profile/status/' + status)
+        } */
+
+    updateStatus(status) {
+        return this.istanse.put(`profile/status`, { status: status })
+    }
 }
 
 export const reqService = new APIservice();

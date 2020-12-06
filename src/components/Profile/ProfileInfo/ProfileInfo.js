@@ -8,9 +8,9 @@ const ProfileInfo = (props) => {
     }
     return (
         <div>
-            <ProfileStatus />
+            {name}
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
             <div>
-                {name}
             </div>
         </div>
     )

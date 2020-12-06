@@ -4,7 +4,7 @@ class ProfileStatus extends Component {
 
     state = {
         edit: false,
-        status: 'foo bar'
+        status: this.props.status
     }
 
     editOn = () => {
@@ -17,6 +17,15 @@ class ProfileStatus extends Component {
         this.setState({
             edit: false
         })
+        this.props.updateStatus(this.state.status);
+    }
+
+    onStatusChange = (e) => {
+        this.setState(
+            {
+                status: e.currentTarget.value
+            });
+
     }
 
     render() {
@@ -25,12 +34,12 @@ class ProfileStatus extends Component {
                 <div>
                     {
                         (!this.state.edit) ? <span onDoubleClick={this.editOn}>{this.state.status}</span>
-                            : <input autoFocus={true} onBlur={this.editOff} value={this.state.status}></input>
+                            : <input autoFocus={true} onChange={this.onStatusChange} onBlur={this.editOff}
+                                value={this.state.status}></input>
                     }
                 </div>
             </div>
         )
     }
 }
-
 export default ProfileStatus;

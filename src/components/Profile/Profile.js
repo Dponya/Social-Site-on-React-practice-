@@ -6,7 +6,7 @@ import NewPostContainer from './MyPost/NewPost/NewPostContainer';
 const Profile = (props) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile} />
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus} />
             <div>
                 my posts
             </div>
