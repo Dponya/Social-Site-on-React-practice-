@@ -6,7 +6,7 @@ let initialState = {
     login: null,
     id: null,
     email: null,
-    isAuthorized: true
+    isAuthorized: false
 }
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
