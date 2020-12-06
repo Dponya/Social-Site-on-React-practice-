@@ -1,4 +1,4 @@
-import { sendMessage, updateMess } from './common/storeFunctions'
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
     authorDialogue: [
@@ -15,10 +15,14 @@ let initialState = {
 export const dialogueReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SEND-MESSAGE':
-            return sendMessage(state);
-        case 'UPDATE-MESS':
-            return updateMess(action.text, state);
+            return {
+                ...state,
+                messageDialogue: [...state.messageDialogue, { message: action.newMess }]
+            }
         default:
             return state;
     }
 }
+
+
+export const sendMessageDispatch = (newMess) => ({ type: SEND_MESSAGE, newMess });

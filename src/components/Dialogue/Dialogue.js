@@ -3,6 +3,7 @@ import styles from './Dialogue.module.css';
 import DialogueAuthor from './DialogueAuthor/DialogueAuthor';
 import Message from './Message/Message';
 import { Redirect } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form';
 
 const Dialogue = (props) => {
 
@@ -14,15 +15,8 @@ const Dialogue = (props) => {
         return <Message message={message.message} id={message.id} />
     });
 
-    let newMessElement = React.createRef();
-
-    let onSendMessage = () => {
-        props.sendMessage()
-    }
-
-    let onUpdateMess = () => {
-        let text = newMessElement.current.value;
-        props.updateMess(text)
+    let onSendMessage = (values) => {
+        props.sendMessage(values.newMess)
     }
     if (props.authorized) {
         return (
@@ -33,9 +27,7 @@ const Dialogue = (props) => {
                 <div className="dialogueMessages">
                     {MessageMapped}
                     <div>
-                        <textarea onChange={onUpdateMess} value={props.dialogueDetails.infoDialogue} ref={newMessElement}>
-                        </textarea>
-                        <button onClick={onSendMessage}>Send your fucking message</button>
+                        <MessSendHOC onSubmit={onSendMessage} />
                     </div>
 
                 </div>
@@ -50,4 +42,16 @@ const Dialogue = (props) => {
     }
 }
 
+
 export default Dialogue;
+
+let MessSend = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field name="newMess" component="textarea" type="text" />
+            <button>Send your fucking message</button>
+        </form>
+    )
+}
+
+const MessSendHOC = reduxForm({ form: "message" })(MessSend)

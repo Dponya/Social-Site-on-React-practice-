@@ -1,5 +1,17 @@
 import React from 'react';
 import Post from '../Post/Post'
+import { Field, reduxForm } from 'redux-form';
+
+let PostWriting = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field name="newPost" component="textarea" type="text" />
+            <button>Set your fucking post</button>
+        </form>
+    )
+}
+
+const PostWritingHOC = reduxForm({ form: "post" })(PostWriting)
 
 const NewPost = (props) => {
 
@@ -7,23 +19,14 @@ const NewPost = (props) => {
         return <Post message={post.message} />
     });
 
-    let newPostElement = React.createRef();
 
 
-
-    let onAddPost = () => {
-        props.addPost();
-    }
-
-    let onUpdateText = () => {
-        let text = newPostElement.current.value;
-        props.updateText(text)
+    let onAddPost = (values) => {
+        props.addPost(values.newPost);
     }
 
     return (<div>
-        <textarea onChange={onUpdateText} value={props.profileDetails.newPostText} ref={newPostElement}>
-        </textarea>
-        <button onClick={onAddPost}>Set your fucking post</button>
+        <PostWritingHOC onSubmit={onAddPost} />
         {PostMapped}
     </div>
     )

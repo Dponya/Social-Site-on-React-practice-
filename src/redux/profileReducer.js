@@ -1,8 +1,8 @@
-import { addPost, updateText } from './common/storeFunctions'
 import { reqService } from '../api/api';
 
 const SET_PROFILE = 'SET-PROFILE';
 const SET_STATUS = 'SET-STATUS';
+const ADD_POST = 'ADD-POST'
 
 let initialState = {
     postData: [
@@ -15,10 +15,11 @@ let initialState = {
 }
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'ADD-POST':
-            return addPost(state);
-        case 'UPDATE-TEXT':
-            return updateText(action.text, state);
+        case ADD_POST:
+            return {
+                ...state,
+                postData: [...state.postData, { message: action.newPost }]
+            }
         case SET_PROFILE:
             return {
                 ...state, profile: action.property
@@ -31,6 +32,8 @@ export const profileReducer = (state = initialState, action) => {
             return state;
     }
 }
+
+export const addPostDispatch = (newPost) => ({ type: ADD_POST, newPost });
 
 export const setProfile = (property) => {
     return { type: SET_PROFILE, property }

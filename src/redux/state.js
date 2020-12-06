@@ -1,8 +1,6 @@
 import { dialogueReducer } from "./dialogueReducer";
 import { profileReducer } from "./profileReducer";
 
-const ADD_POST = 'ADD-POST';
-const UPDATE_TEXT = 'UPDATE-TEXT';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const UPDATE_MESS = 'UPDATE-MESS';
 
@@ -56,9 +54,7 @@ let store = {
     }
 }
 
-export const addPostDispatch = () => ({ type: ADD_POST });
-export const updateTextDispatch = (text) => ({ type: UPDATE_TEXT, text: text });
-export const sendMessageDispatch = () => ({ type: SEND_MESSAGE });
+export const sendMessageDispatch = (newMess) => ({ type: SEND_MESSAGE, newMess });
 export const updateMessDispatch = (text) => ({ type: UPDATE_MESS, text: text });
 
 export default store;
