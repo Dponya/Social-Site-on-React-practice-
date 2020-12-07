@@ -4,6 +4,8 @@ import DialogueAuthor from './DialogueAuthor/DialogueAuthor';
 import Message from './Message/Message';
 import { Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form';
+import { maxLength } from '../common/FormValidations'
+import { Textarea } from '../common/FormValidComponent'
 
 const Dialogue = (props) => {
 
@@ -45,10 +47,12 @@ const Dialogue = (props) => {
 
 export default Dialogue;
 
+let maxDialogue = maxLength(5);
+
 let MessSend = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name="newMess" component="textarea" type="text" />
+            <Field name="newMess" component={Textarea} type="text" validate={maxDialogue} />
             <button>Send your fucking message</button>
         </form>
     )
