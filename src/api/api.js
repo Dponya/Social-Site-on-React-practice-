@@ -8,7 +8,7 @@ class APIservice {
         this.istanse = axios.create({
             withCredentials: true,
             baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-            headers: { 'API-KEY': 'e466e855-07af-43c0-8344-c4c11ad80425' }
+            headers: { 'API-KEY': '3ba05ded-a718-412a-bde0-9e786dbc76c5' }
         })
     }
 
@@ -40,12 +40,12 @@ class APIservice {
         return this.istanse.get('profile/status/' + userId)
     }
 
-    /*     updateStatus = (status) => {
-            return this.istanse.put('profile/status/' + status)
-        } */
-
     updateStatus(status) {
         return this.istanse.put(`profile/status`, { status: status })
+    }
+
+    login = (email, password, rememberMe) => {
+        return this.istanse.post('auth/login', { email, password, rememberMe })
     }
 }
 
