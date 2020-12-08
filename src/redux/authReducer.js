@@ -51,9 +51,15 @@ export const authThunkCreator = () =>
 export const loginhunkCreator = (email, password, rememberMe) =>
     (dispatch) => {
         reqService.login(email, password, rememberMe).then(response => {
-            /* if (response.data.resultCode === 0) dispatch(setLoginUserData(true));
-            else return 0; */
             if (response.data.resultCode === 0) dispatch(authThunkCreator)
+            else return 0;
+        });
+    }
+
+export const logouthunkCreator = () =>
+    (dispatch) => {
+        reqService.logout().then(response => {
+            if (response.data.resultCode === 0) dispatch(setAuthUserData(null, null, null, false))
             else return 0;
         });
     }

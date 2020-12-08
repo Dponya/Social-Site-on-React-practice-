@@ -47,6 +47,10 @@ class APIservice {
     login = (email, password, rememberMe) => {
         return this.istanse.post('auth/login', { email, password, rememberMe })
     }
+
+    logout = () => {
+        return this.istanse.delete('auth/login')
+    }
 }
 
 export const reqService = new APIservice();
