@@ -13,7 +13,6 @@ export const withRedirecting = (Component) => {
     class RedirectComponent extends React.Component {
         render() {
             if (!this.props.authorized) return <Redirect to={'/login'} />
-
             return <Component {...this.props} />
         }
     }

@@ -7,8 +7,12 @@ import Profile from './Profile'
 import { compose } from 'redux';
 class ProfileContainer extends Component {
     componentDidMount() {
-        this.props.getProfileThunkCreator(13034)
-        this.props.getStatusThunkCreator(13034)
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = this.props.userId;
+        };
+        this.props.getProfileThunkCreator(userId)
+        this.props.getStatusThunkCreator(userId)
         // this.props.match.params.userId       
     }
     render() {
@@ -24,7 +28,8 @@ class ProfileContainer extends Component {
 let mapStateToProps = (state) => {
     return {
         profile: state.profileDetails.profile,
-        status: state.profileDetails.status
+        status: state.profileDetails.status,
+        userId: state.auth.id
     }
 }
 

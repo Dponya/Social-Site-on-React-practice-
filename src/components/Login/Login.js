@@ -5,6 +5,7 @@ import { required } from '../common/FormValidations';
 import { loginhunkCreator } from '../../redux/authReducer';
 import { connect } from 'react-redux';
 import style from '../common/FormValid.module.css'
+import { Redirect } from 'react-router-dom';
 
 let Login = props => {
     const { handleSubmit } = props
@@ -40,8 +41,21 @@ class ContactPage extends React.Component {
         console.log(values);
     }
     render() {
-        return <LoginFormHOC onSubmit={this.submit} />
+        debugger;
+        return (
+            <div>
+                { this.props.authorized ? <Redirect to={'/profile'} /> :
+                    <LoginFormHOC onSubmit={this.submit} />}
+            </div>
+        )
     }
 }
 
-export default connect(null, { loginhunkCreator })(ContactPage)
+let mapStateToProps = (state) => {
+    debugger;
+    return {
+        authorized: state.auth.isAuthorized
+    }
+}
+
+export default connect(mapStateToProps, { loginhunkCreator })(ContactPage)

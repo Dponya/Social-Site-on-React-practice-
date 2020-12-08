@@ -36,7 +36,7 @@ export const setLoginUserData = (auth) => {
 }
 
 export const authThunkCreator = () =>
-    (dispatch) => {
+    (dispatch) =>
         reqService.auth().then(response => {
             console.log(response.data.data);
             const { login, email, id } = response.data.data;
@@ -47,12 +47,11 @@ export const authThunkCreator = () =>
                 dispatch(setAuthUserData(login, email, id, true))
             }
         });
-    }
 
 export const loginhunkCreator = (email, password, rememberMe) =>
     (dispatch) => {
         reqService.login(email, password, rememberMe).then(response => {
-            if (response.data.resultCode === 0) dispatch(authThunkCreator)
+            if (response.data.resultCode === 0) dispatch(authThunkCreator())
             else {
                 console.log(response);
                 let action = stopSubmit('login', { _error: 'Password or Email is uncorrect' });
