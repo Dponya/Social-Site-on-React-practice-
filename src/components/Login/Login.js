@@ -1,9 +1,10 @@
 import { Field, reduxForm } from 'redux-form';
 import React from 'react';
 import { Input } from '../common/FormValidComponent';
-import { required } from '../common/FormValidations'
-import { loginhunkCreator } from '../../redux/authReducer'
-import { connect } from 'react-redux'
+import { required } from '../common/FormValidations';
+import { loginhunkCreator } from '../../redux/authReducer';
+import { connect } from 'react-redux';
+import style from '../common/FormValid.module.css'
 
 let Login = props => {
     const { handleSubmit } = props
@@ -19,6 +20,9 @@ let Login = props => {
             </div>
             <div>
                 <Field name="rememberMe" id="rememberMe" component="input" type="checkbox" />
+            </div>
+            <div>
+                <span className={style.uncorrectauth}>{props.error}</span>
             </div>
             <button type="submit">Submit</button>
         </form>

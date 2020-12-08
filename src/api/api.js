@@ -8,7 +8,7 @@ class APIservice {
         this.istanse = axios.create({
             withCredentials: true,
             baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-            headers: { 'API-KEY': '3ba05ded-a718-412a-bde0-9e786dbc76c5' }
+            headers: { 'API-KEY': '93c26514-95da-4934-9798-6f460c8f38b9' }
         })
     }
 

@@ -1,3 +1,4 @@
+import { stopSubmit } from 'redux-form';
 import { reqService } from '../api/api'
 
 const SET_AUTH = 'SET-AUTH';
@@ -52,7 +53,11 @@ export const loginhunkCreator = (email, password, rememberMe) =>
     (dispatch) => {
         reqService.login(email, password, rememberMe).then(response => {
             if (response.data.resultCode === 0) dispatch(authThunkCreator)
-            else return 0;
+            else {
+                console.log(response);
+                let action = stopSubmit('login', { _error: 'Password or Email is uncorrect' });
+                dispatch(action)
+            }
         });
     }
 
@@ -60,6 +65,5 @@ export const logouthunkCreator = () =>
     (dispatch) => {
         reqService.logout().then(response => {
             if (response.data.resultCode === 0) dispatch(setAuthUserData(null, null, null, false))
-            else return 0;
         });
     }

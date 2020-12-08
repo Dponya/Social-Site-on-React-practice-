@@ -1,3 +1,8 @@
 .error {
     color: red;
 }
+
+.uncorrectauth {
+    color: red;
+    border: red 2px solid;
+}
