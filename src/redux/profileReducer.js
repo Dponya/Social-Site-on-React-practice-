@@ -11,7 +11,7 @@ let initialState = {
     ],
     newPostText: '',
     profile: [],
-    status: ''
+    status: 'starter'
 }
 export const profileReducer = (state = initialState, action) => {
     switch (action.type) {

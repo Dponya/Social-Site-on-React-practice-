@@ -1,5 +1,5 @@
 /* import styles from '../Profile.module.css' */
-import ProfileStatus from '../ProfileStatus/ProfileStatus'
+import { ProfileStatus } from '../ProfileStatus/ProfileStatusWithHooks'
 
 const ProfileInfo = (props) => {
     let name = props.profile.fullName
