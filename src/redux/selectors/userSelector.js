@@ -1,6 +1,14 @@
+import { createSelector } from "reselect"
+
 export const stateUsers = (state) => {
     return state.usersDetails.users
 }
+
+export const stateUsersReselector = createSelector(
+    stateUsers, (users) => {
+        return users.filter(us => true)
+
+    })
 
 export const stateTotalCount = (state) => {
     return state.usersDetails.totalCount

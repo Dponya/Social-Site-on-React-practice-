@@ -9,7 +9,7 @@ import {
 } from '../../redux/usersReducer';
 import { withRedirecting } from '../../hoc/withAuthHoc'
 import { compose } from 'redux';
-import { sateCurrentPage, stateFollowingProgress, stateIsFetching, statePageCount, stateTotalCount, stateUsers } from '../../redux/selectors/userSelector'
+import { sateCurrentPage, stateFollowingProgress, stateIsFetching, statePageCount, stateTotalCount, stateUsersReselector } from '../../redux/selectors/userSelector'
 
 
 class UsersContainerAPI extends Component {
@@ -21,6 +21,7 @@ class UsersContainerAPI extends Component {
         this.props.pageChangedThunkCreator(el);
     }
     render() {
+        console.log('render')
         return (<>
             {this.props.isFetching ?
                 <Loader /> :
@@ -37,8 +38,9 @@ class UsersContainerAPI extends Component {
 
 
 let mapStateToProps = (state) => {
+    console.log('statetoprops')
     return {
-        users: stateUsers(state),
+        users: stateUsersReselector(state),
         totalCount: stateTotalCount(state),
         pageCount: statePageCount(state),
         currentPage: sateCurrentPage(state),
