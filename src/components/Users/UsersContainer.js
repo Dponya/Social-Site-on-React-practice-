@@ -9,7 +9,7 @@ import {
 } from '../../redux/usersReducer';
 import { withRedirecting } from '../../hoc/withAuthHoc'
 import { compose } from 'redux';
-
+import { sateCurrentPage, stateFollowingProgress, stateIsFetching, statePageCount, stateTotalCount, stateUsers } from '../../redux/selectors/userSelector'
 
 
 class UsersContainerAPI extends Component {
@@ -38,12 +38,12 @@ class UsersContainerAPI extends Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersDetails.users,
-        totalCount: state.usersDetails.totalCount,
-        pageCount: state.usersDetails.pageCount,
-        currentPage: state.usersDetails.currentPage,
-        isFetching: state.usersDetails.isFetching,
-        followingProgress: state.usersDetails.followingProgress
+        users: stateUsers(state),
+        totalCount: stateTotalCount(state),
+        pageCount: statePageCount(state),
+        currentPage: sateCurrentPage(state),
+        isFetching: stateIsFetching(state),
+        followingProgress: stateFollowingProgress(state)
     }
 }
 
