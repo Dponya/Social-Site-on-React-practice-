@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import NavigationBar from './NavigationBar/NavigationBar';
 import { Route, withRouter } from 'react-router-dom'
-import DialogueContainer from './Dialogue/DialogueContainer';
 import UsersContainer from './Users/UsersContainer'
 import ProfileContainer from './Profile/ProfileContainer';
 import HeaderContainer from './Header/HeaderContainer';
@@ -11,6 +10,8 @@ import Loader from './common/Loader';
 import { compose } from 'redux';
 import { connect } from 'react-redux'
 import { setInizilizeAppThunkCreator } from '../redux/app-reducer'
+import { withSuspense } from '../hoc/withSuspense'
+const DialogueContainer = React.lazy(() => import('./Dialogue/DialogueContainer'));
 
 class App extends React.Component {
   componentDidMount() {
@@ -25,7 +26,7 @@ class App extends React.Component {
             <HeaderContainer />
             <NavigationBar />
             <div className="main">
-              <Route path="/dialogs" render={() => <DialogueContainer />} />
+              <Route path="/dialogs" render={withSuspense(DialogueContainer)} />
               <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
               <Route path="/users" render={() => <UsersContainer />} />
               <Route path="/login" render={() => <Login />} />
