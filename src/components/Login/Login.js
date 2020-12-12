@@ -25,6 +25,14 @@ let Login = props => {
             <div>
                 <span className={style.uncorrectauth}>{props.error}</span>
             </div>
+            <div>
+                {
+                    props.captcha ? <div>
+                        <img src={props.captcha} />
+                        <Field name="captcha" id="captcha" component="input" />
+                    </div> : null
+                }
+            </div>
             <button type="submit">Submit</button>
         </form>
     )
@@ -37,15 +45,17 @@ class ContactPage extends React.Component {
 
 
     submit = values => {
-        this.props.loginhunkCreator(values.email, values.password, values.rememberMe);
+        this.props.loginhunkCreator(values.email, values.password, values.rememberMe, values.captcha);
         console.log(values);
     }
     render() {
         debugger;
         return (
             <div>
-                { this.props.authorized ? <Redirect to={'/profile'} /> :
-                    <LoginFormHOC onSubmit={this.submit} />}
+                <div>
+                    {this.props.authorized ? <Redirect to={'/profile'} /> :
+                        <LoginFormHOC onSubmit={this.submit} captcha={this.props.captcha} />}
+                </div>
             </div>
         )
     }
@@ -54,7 +64,8 @@ class ContactPage extends React.Component {
 let mapStateToProps = (state) => {
     debugger;
     return {
-        authorized: state.auth.isAuthorized
+        authorized: state.auth.isAuthorized,
+        captcha: state.auth.captcha
     }
 }
 

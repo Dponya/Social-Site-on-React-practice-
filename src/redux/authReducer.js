@@ -2,13 +2,15 @@ import { stopSubmit } from 'redux-form';
 import { reqService } from '../api/api'
 
 const SET_AUTH = 'SET-AUTH';
-const SET_LOGIN = 'SET-LOGIN'
+const SET_LOGIN = 'SET-LOGIN';
+const CAPTCHA = 'CAPTHA-AUTH-REDUCER'
 
 let initialState = {
     login: null,
     id: null,
     email: null,
-    isAuthorized: false
+    isAuthorized: false,
+    captcha: null
 }
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -20,7 +22,12 @@ export const authReducer = (state = initialState, action) => {
         case SET_LOGIN:
             return {
                 ...state,
-                isAuthorized: action.auth
+                captcha: action.captcha
+            }
+        case CAPTCHA:
+            return {
+                ...state,
+                captcha: action.captcha
             }
         default:
             return state;
@@ -35,6 +42,18 @@ export const setLoginUserData = (auth) => {
     return { type: SET_LOGIN, auth: { auth } }
 }
 
+export const setCaptchaUrl = (captchaUrl) => {
+    return { type: CAPTCHA, captcha: captchaUrl }
+}
+
+export const captchaThunkCreator = () =>
+    async (dispatch) => {
+        let response = await reqService.captcha()
+
+        dispatch(setCaptchaUrl(response.data.url));
+        console.log(response);
+    }
+
 export const authThunkCreator = () =>
     (dispatch) =>
         reqService.auth().then(response => {
@@ -48,10 +67,13 @@ export const authThunkCreator = () =>
             }
         });
 
-export const loginhunkCreator = (email, password, rememberMe) =>
+export const loginhunkCreator = (email, password, rememberMe, captcha) =>
     (dispatch) => {
-        reqService.login(email, password, rememberMe).then(response => {
+        reqService.login(email, password, rememberMe, captcha).then(response => {
             if (response.data.resultCode === 0) dispatch(authThunkCreator())
+            else if (response.data.resultCode === 10) {
+                dispatch(captchaThunkCreator());
+            }
             else {
                 console.log(response);
                 let action = stopSubmit('login', { _error: 'Password or Email is uncorrect' });

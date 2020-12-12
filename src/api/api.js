@@ -44,12 +44,16 @@ class APIservice {
         return this.istanse.put(`profile/status`, { status: status })
     }
 
-    login = (email, password, rememberMe) => {
-        return this.istanse.post('auth/login', { email, password, rememberMe })
+    login = (email, password, rememberMe, captcha) => {
+        return this.istanse.post('auth/login', { email, password, rememberMe, captcha })
     }
 
     logout = () => {
         return this.istanse.delete('auth/login')
+    }
+
+    captcha = () => {
+        return this.istanse.get('/security/get-captcha-url')
     }
 }
 
